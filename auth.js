@@ -21,7 +21,7 @@ function setStatus(t) {
 let auth = null
 
 function init() {
-  if (firebaseConfig.apiKey === "PASTE") {
+  if (firebaseConfig.apiKey === "AIzaSyAfmn8E7sX2P7AxjhHifPjdW2W-N8WKg8Q") {
     setStatus("Add Firebase config in auth.js to enable login.")
     return
   }
@@ -68,3 +68,4 @@ function init() {
 }
 
 init()
+
