@@ -1,22 +1,41 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Login | Study Buddy</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <h1>Study Buddy Login</h1>
+<head>
+  <title>Login | Study Buddy</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="topbar">
+    <div class="brand">
+      <div class="brand-badge">SB</div>
+      <div class="brand-title">Study Buddy</div>
+    </div>
+    <div class="top-actions">
+      <a class="btn" href="index.html">Dashboard</a>
+    </div>
+  </div>
 
-    <input id="email" type="email" placeholder="Email"><br>
-    <input id="password" type="password" placeholder="Password"><br>
+  <div class="lesson-wrap">
+    <div class="block" style="max-width: 520px; margin: 20px auto;">
+      <h3>Account</h3>
+      <div class="muted">This page works with Firebase Auth when you add your config to auth.js.</div>
 
-    <button onclick="signup()">Sign Up</button>
-    <button onclick="login()">Log In</button>
+      <div style="display: grid; gap: 10px; margin-top: 12px;">
+        <input class="search" id="email" type="email" placeholder="Email">
+        <input class="search" id="password" type="password" placeholder="Password">
 
-    <p id="status"></p>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <button class="btn primary" id="signupBtn">Sign up</button>
+          <button class="btn" id="loginBtn">Log in</button>
+          <button class="btn" id="logoutBtn">Log out</button>
+        </div>
 
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js"></script>
-    <script src="auth.js"></script>
-  </body>
+        <div class="status" id="authStatus"></div>
+        <div class="muted">Progress works without login. Login is for syncing later.</div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="auth.js"></script>
+</body>
 </html>
