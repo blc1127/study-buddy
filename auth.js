@@ -1,5 +1,5 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js"
 
 const firebaseConfig = {
   apiKey: "AIzaSyAfmn8E7sX2P7AxjhHifPjdW2W-N8WKg8Q",
@@ -8,34 +8,63 @@ const firebaseConfig = {
   storageBucket: "study-buddy-c8792.firebasestorage.app",
   messagingSenderId: "341639345366",
   appId: "1:341639345366:web:2c4a06284c8930c9640577"
-};
+}
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+const statusEl = document.getElementById("authStatus")
+const emailEl = document.getElementById("email")
+const passEl = document.getElementById("password")
 
-window.signup = function () {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+function setStatus(t) {
+  if (statusEl) statusEl.textContent = t
+}
 
-  createUserWithEmailAndPassword(auth, email, password)
-    .then(() => {
-      document.getElementById("status").textContent = "Account created.";
-    })
-    .catch(err => {
-      document.getElementById("status").textContent = err.message;
-    });
-};
+let auth = null
 
-window.login = function () {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+function init() {
+  if (firebaseConfig.apiKey === "PASTE") {
+    setStatus("Add Firebase config in auth.js to enable login.")
+    return
+  }
 
-  signInWithEmailAndPassword(auth, email, password)
-    .then(() => {
-      document.getElementById("status").textContent = "Logged in.";
-      window.location.href = "index.html";
-    })
-    .catch(err => {
-      document.getElementById("status").textContent = err.message;
-    });
-};
+  const app = initializeApp(firebaseConfig)
+  auth = getAuth(app)
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) setStatus("Signed in: " + user.email)
+    else setStatus("Signed out.")
+  })
+
+  document.getElementById("signupBtn").addEventListener("click", async () => {
+    const email = emailEl.value.trim()
+    const password = passEl.value
+    try {
+      await createUserWithEmailAndPassword(auth, email, password)
+      setStatus("Account created.")
+    } catch (e) {
+      setStatus(String(e.message || e))
+    }
+  })
+
+  document.getElementById("loginBtn").addEventListener("click", async () => {
+    const email = emailEl.value.trim()
+    const password = passEl.value
+    try {
+      await signInWithEmailAndPassword(auth, email, password)
+      setStatus("Signed in.")
+      window.location.href = "index.html"
+    } catch (e) {
+      setStatus(String(e.message || e))
+    }
+  })
+
+  document.getElementById("logoutBtn").addEventListener("click", async () => {
+    try {
+      await signOut(auth)
+      setStatus("Signed out.")
+    } catch (e) {
+      setStatus(String(e.message || e))
+    }
+  })
+}
+
+init()
