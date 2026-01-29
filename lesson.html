@@ -1,28 +1,51 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Lesson | Study Buddy</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <header>
-      <h1 id="lessonTitle">Lesson</h1>
-      <p id="lessonGrade">Grade Level</p>
-    </header>
+<head>
+  <title>Lesson | Study Buddy</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="topbar">
+    <div class="brand">
+      <div class="brand-badge">SB</div>
+      <div class="brand-title">Study Buddy</div>
+    </div>
+    <div class="top-actions">
+      <a class="btn" href="index.html">Dashboard</a>
+      <a class="btn" href="login.html">Login</a>
+    </div>
+  </div>
 
-    <section>
-      <h2>What you will learn</h2>
-      <p id="lessonIntro"></p>
+  <div class="lesson-wrap">
+    <div class="panel lesson-hero">
+      <div class="h1" id="lessonTitle">Lesson</div>
+      <div class="muted" id="lessonMeta">Subject, grade</div>
+      <div class="video-slot" id="videoHint">Video slot</div>
+    </div>
 
-      <h2>Notes</h2>
-      <p id="lessonNotes"></p>
+    <div class="two-col">
+      <div class="block">
+        <h3>Notes</h3>
+        <ul class="list" id="notes"></ul>
 
-      <h2>Practice</h2>
-      <ul id="lessonPractice"></ul>
-    </section>
+        <h3 style="margin-top: 16px">Examples</h3>
+        <ul class="list" id="examples"></ul>
+      </div>
 
-    <a href="index.html">Back to Home</a>
+      <div class="block">
+        <h3>Quiz</h3>
+        <div class="muted">Pick answers, submit, then your score saves.</div>
+        <div id="quiz"></div>
+        <div style="margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap;">
+          <button class="btn primary" id="submitQuiz">Submit quiz</button>
+          <button class="btn" id="markDone">Mark lesson complete</button>
+          <a class="btn" href="index.html">Back</a>
+        </div>
+        <div style="margin-top: 10px" class="status" id="quizStatus"></div>
+      </div>
+    </div>
+  </div>
 
-    <script src="script.js"></script>
-  </body>
+  <script type="module" src="lesson.js"></script>
+</body>
 </html>
