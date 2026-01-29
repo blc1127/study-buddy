@@ -1,26 +1,101 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Study Buddy</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="app.css" />
   </head>
   <body>
-    <header>
-      <h1>Study Buddy</h1>
-      <p>Your school helper for every subject.</p>
-      <nav>
-        <a href="index.html">Home</a>
-        <a href="math.html">Math</a>
-        <a href="ela.html">ELA</a>
-        <a href="science.html">Science</a>
-        <a href="history.html">History</a>
-        <a href="login.html">Login</a>
-      </nav>
-    </header>
+    <div class="app">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brandMark">SB</div>
+          <div class="brandText">
+            <div class="brandName">Study Buddy</div>
+            <div class="brandTag">Learn faster. Track progress.</div>
+          </div>
+        </div>
 
-    <section>
-      <h2>Select a subject</h2>
-      <p>Then choose your grade level.</p>
-    </section>
+        <div class="topbarRight">
+          <div class="searchWrap">
+            <input id="globalSearch" class="search" type="search" placeholder="Search lessons, topics, skills" autocomplete="off" />
+            <div id="searchResults" class="searchResults hidden"></div>
+          </div>
+
+          <button id="loginBtn" class="btn btnGhost" type="button">Login</button>
+        </div>
+      </header>
+
+      <div class="shell">
+        <aside class="sidebar">
+          <div class="sideSection">
+            <div class="sideTitle">Browse</div>
+            <nav class="sideNav">
+              <a class="navItem" href="#/dashboard" data-route="dashboard">Dashboard</a>
+              <a class="navItem" href="#/subjects" data-route="subjects">Subjects</a>
+              <a class="navItem" href="#/progress" data-route="progress">Progress</a>
+              <a class="navItem" href="#/tools" data-route="tools">Tools</a>
+            </nav>
+          </div>
+
+          <div class="sideSection">
+            <div class="sideTitle">Subjects</div>
+            <div id="subjectLinks" class="pillGrid"></div>
+          </div>
+
+          <div class="sideSection">
+            <div class="sideTitle">Grade</div>
+            <div class="gradePicker">
+              <select id="gradeSelect" class="select">
+                <option value="all">All grades</option>
+                <option value="1">Grade 1</option>
+                <option value="2">Grade 2</option>
+                <option value="3">Grade 3</option>
+                <option value="4">Grade 4</option>
+                <option value="5">Grade 5</option>
+                <option value="6">Grade 6</option>
+                <option value="7">Grade 7</option>
+                <option value="8">Grade 8</option>
+                <option value="9">Grade 9</option>
+                <option value="10">Grade 10</option>
+                <option value="11">Grade 11</option>
+                <option value="12">Grade 12</option>
+              </select>
+              <div class="helperText">Filters lessons across the site.</div>
+            </div>
+          </div>
+        </aside>
+
+        <main class="main">
+          <div id="toast" class="toast hidden"></div>
+          <div id="view" class="view"></div>
+        </main>
+      </div>
+
+      <footer class="footer">
+        <div>Study Buddy</div>
+        <div class="footerRight">
+          <a href="#/dashboard">Home</a>
+          <span class="dot">•</span>
+          <a href="#/tools">Study Tools</a>
+          <span class="dot">•</span>
+          <a href="#/subjects">All Subjects</a>
+        </div>
+      </footer>
+    </div>
+
+    <div id="modalBackdrop" class="modalBackdrop hidden" role="dialog" aria-modal="true">
+      <div class="modal">
+        <div class="modalHeader">
+          <div class="modalTitle" id="modalTitle">Login</div>
+          <button id="modalClose" class="iconBtn" type="button" aria-label="Close">✕</button>
+        </div>
+        <div class="modalBody" id="modalBody"></div>
+      </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>
