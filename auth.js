@@ -5,68 +5,48 @@ const firebaseConfig = {
   apiKey: "AIzaSyAfmn8E7sX2P7AxjhHifPjdW2W-N8WKg8Q",
   authDomain: "study-buddy-c8792.firebaseapp.com",
   projectId: "study-buddy-c8792",
-  storageBucket: "study-buddy-c8792.firebasestorage.app",
+  storageBucket: "study-buddy-c8792.appspot.com",
   messagingSenderId: "341639345366",
   appId: "1:341639345366:web:2c4a06284c8930c9640577"
 }
 
-const statusEl = document.getElementById("authStatus")
-const emailEl = document.getElementById("email")
-const passEl = document.getElementById("password")
+const app = initializeApp(firebaseConfig)
+const auth = getAuth(app)
 
-function setStatus(t) {
-  if (statusEl) statusEl.textContent = t
-}
+const email = document.getElementById("email")
+const password = document.getElementById("password")
+const status = document.getElementById("authStatus")
 
-let auth = null
-
-function init() {
-  if (firebaseConfig.apiKey === "AIzaSyAfmn8E7sX2P7AxjhHifPjdW2W-N8WKg8Q") {
-    setStatus("Add Firebase config in auth.js to enable login.")
-    return
+document.getElementById("signupBtn").onclick = async () => {
+  try {
+    await createUserWithEmailAndPassword(auth, email.value, password.value)
+    status.textContent = "Account created."
+  } catch (e) {
+    status.textContent = e.message
   }
-
-  const app = initializeApp(firebaseConfig)
-  auth = getAuth(app)
-
-  onAuthStateChanged(auth, (user) => {
-    if (user) setStatus("Signed in: " + user.email)
-    else setStatus("Signed out.")
-  })
-
-  document.getElementById("signupBtn").addEventListener("click", async () => {
-    const email = emailEl.value.trim()
-    const password = passEl.value
-    try {
-      await createUserWithEmailAndPassword(auth, email, password)
-      setStatus("Account created.")
-    } catch (e) {
-      setStatus(String(e.message || e))
-    }
-  })
-
-  document.getElementById("loginBtn").addEventListener("click", async () => {
-    const email = emailEl.value.trim()
-    const password = passEl.value
-    try {
-      await signInWithEmailAndPassword(auth, email, password)
-      setStatus("Signed in.")
-      window.location.href = "index.html"
-    } catch (e) {
-      setStatus(String(e.message || e))
-    }
-  })
-
-  document.getElementById("logoutBtn").addEventListener("click", async () => {
-    try {
-      await signOut(auth)
-      setStatus("Signed out.")
-    } catch (e) {
-      setStatus(String(e.message || e))
-    }
-  })
 }
 
-init()
+document.getElementById("loginBtn").onclick = async () => {
+  try {
+    await signInWithEmailAndPassword(auth, email.value, password.value)
+    status.textContent = "Signed in."
+    window.location.href = "index.html"
+  } catch (e) {
+    status.textContent = e.message
+  }
+}
 
+document.getElementById("logoutBtn").onclick = async () => {
+  try {
+    await signOut(auth)
+    status.textContent = "Signed out."
+  } catch (e) {
+    status.textContent = e.message
+  }
+}
 
+onAuthStateChanged(auth, user => {
+  if (user) {
+    status.textContent = "Signed in as " + user.email
+  }
+})
