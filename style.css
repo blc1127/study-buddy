@@ -14,3 +14,67 @@ nav a {
 h1 {
   color: #1f4fd8;
 }
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  background: #1f4fd8;
+  color: white;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.top-links a {
+  color: white;
+  text-decoration: none;
+}
+
+.app {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 200px;
+  background: #e9ecf3;
+  padding: 20px;
+}
+
+.sidebar a {
+  display: block;
+  margin: 10px 0;
+  text-decoration: none;
+  color: #1f4fd8;
+  font-weight: bold;
+}
+
+.content {
+  flex: 1;
+  padding: 30px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 20px;
+  text-decoration: none;
+  color: #1f4fd8;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.tools {
+  width: 200px;
+  background: #f5f6fa;
+  padding: 20px;
+}
