@@ -5,43 +5,76 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<div class="topbar">
-  <div class="logo">Study Buddy</div>
-  <div class="top-links">
-    <a href="login.html">Login</a>
-  </div>
-</div>
-
-<div class="app">
-  <div class="sidebar">
-    <h3>Subjects</h3>
-    <a href="math.html">Math</a>
-    <a href="ela.html">ELA</a>
-    <a href="science.html">Science</a>
-    <a href="history.html">History</a>
-  </div>
-
-  <div class="content">
-    <h1>Welcome back</h1>
-    <p>Pick a subject to start learning.</p>
-
-    <div class="cards">
-      <a class="card" href="math.html">Math</a>
-      <a class="card" href="ela.html">ELA</a>
-      <a class="card" href="science.html">Science</a>
-      <a class="card" href="history.html">History</a>
+  <div class="topbar">
+    <div class="brand">
+      <div class="brand-badge">SB</div>
+      <div class="brand-title">Study Buddy</div>
+    </div>
+    <div class="top-actions">
+      <a class="btn" href="login.html">Login</a>
     </div>
   </div>
 
-  <div class="tools">
-    <h3>Tools</h3>
-    <button onclick="startTimer()">Study Timer</button>
-    <p id="timer">25:00</p>
+  <div class="app">
+    <div class="panel sidebar">
+      <h3>Subjects</h3>
+      <div class="nav" id="subjectNav"></div>
+
+      <h3>Grades</h3>
+      <div class="nav" id="gradeNav"></div>
+    </div>
+
+    <div class="panel main">
+      <div class="header-row">
+        <div>
+          <h1 class="h1">Dashboard</h1>
+          <p class="sub">Pick a subject and grade. Start a lesson. Track your progress.</p>
+        </div>
+
+        <div class="filters">
+          <input class="search" id="search" placeholder="Search lessons">
+          <select class="select" id="sort">
+            <option value="recommended">Recommended</option>
+            <option value="title">Title</option>
+            <option value="grade">Grade</option>
+            <option value="subject">Subject</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="status" id="progressText">Progress</div>
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="muted" id="continueText"></div>
+        <div>
+          <a class="btn primary" id="continueBtn" href="lesson.html?id=">Continue learning</a>
+          <button class="btn" id="resetProgress">Reset progress</button>
+        </div>
+      </div>
+
+      <div class="grid" id="lessonGrid"></div>
+    </div>
+
+    <div class="panel tools">
+      <h3>Tools</h3>
+
+      <div class="tool-block">
+        <div class="status">Study timer</div>
+        <div class="timer" id="timer">25:00</div>
+        <div>
+          <button class="btn primary" id="timerStart">Start</button>
+          <button class="btn" id="timerReset">Reset</button>
+        </div>
+        <div class="muted">25 minutes study, then take a short break.</div>
+      </div>
+
+      <div class="tool-block">
+        <div class="status">Quick tips</div>
+        <div class="muted" id="tip">Pick one lesson. Finish the quiz. Repeat.</div>
+      </div>
+    </div>
   </div>
-</div>
 
-<script src="tools.js"></script>
-
+  <script type="module" src="app.js"></script>
 </body>
 </html>
