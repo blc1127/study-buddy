@@ -14,7 +14,23 @@
 </div>
 
 <div class="chat-container">
+<div class="chat-container">
+
+  <div class="subject-bar">
+    <button onclick="setSubject('math')">Math</button>
+    <button onclick="setSubject('ela')">ELA</button>
+    <button onclick="setSubject('science')">Science</button>
+    <button onclick="setSubject('history')">History</button>
+  </div>
+
   <div id="chat"></div>
+
+  <div class="input-bar">
+    <input id="input" type="text" placeholder="Ask your question">
+    <button id="send">Send</button>
+  </div>
+
+</div>
 
   <div class="input-bar">
     <input id="input" placeholder="Ask anything. Math, ELA, science..." />
@@ -24,10 +40,16 @@
 
 <script>
 const api = "https://jolly-cell-68d2.blake1127mm.workers.dev";
+let currentSubject = "general";
 
 const chat = document.getElementById("chat");
 const input = document.getElementById("input");
 const send = document.getElementById("send");
+
+  function setSubject(sub) {
+  currentSubject = sub;
+  chat.innerHTML += "<div class='system'>Switched to " + sub.toUpperCase() + " mode</div>";
+}
 
 send.onclick = async () => {
   const msg = input.value.trim();
@@ -39,8 +61,15 @@ send.onclick = async () => {
   const res = await fetch(api, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ message: msg })
+    body: JSON.stringify({
+      message: "[" + currentSubject + "] " + msg
+    })
   });
+
+  const data = await res.json();
+  chat.innerHTML += "<div class='bot'>" + data.reply + "</div>";
+};
+
 
   const data = await res.json();
   chat.innerHTML += "<div class='bot'>" + data.reply + "</div>";
