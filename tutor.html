@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Study Buddy AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <div class="brand-badge">SB</div>
+    <div class="brand-title">Study Buddy AI</div>
+  </div>
+</div>
+
+<div class="chat-container">
+  <div id="chat"></div>
+
+  <div class="input-bar">
+    <input id="input" placeholder="Ask anything. Math, ELA, science..." />
+    <button id="send">Send</button>
+  </div>
+</div>
+
+<script>
+const api = "https://jolly-cell-68d2.blake1127mm.workers.dev";
+
+const chat = document.getElementById("chat");
+const input = document.getElementById("input");
+const send = document.getElementById("send");
+
+send.onclick = async () => {
+  const msg = input.value.trim();
+  if (!msg) return;
+
+  chat.innerHTML += "<div class='user'>" + msg + "</div>";
+  input.value = "";
+
+  const res = await fetch(api, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ message: msg })
+  });
+
+  const data = await res.json();
+  chat.innerHTML += "<div class='bot'>" + data.reply + "</div>";
+  chat.scrollTop = chat.scrollHeight;
+};
+</script>
+
+</body>
+</html>
