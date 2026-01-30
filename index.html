@@ -1,80 +1,67 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Study Buddy</title>
-  <link rel="stylesheet" href="style.css">
+<title>Study Buddy AI</title>
+<link rel="stylesheet" href="app.css">
 </head>
 <body>
-  <div class="topbar">
-    <div class="brand">
-      <div class="brand-badge">SB</div>
-      <div class="brand-title">Study Buddy</div>
-    </div>
-    <div class="top-actions">
-      <a class="btn" href="login.html">Login</a>
-    </div>
+
+<div class="app">
+
+  <div class="sidebar">
+    <h2>Study Buddy</h2>
+    <button onclick="showView('dashboard')">Dashboard</button>
+    <button onclick="showView('library')">Study Guides</button>
+    <button onclick="showView('chat')">AI Tutor</button>
+    <button onclick="showView('settings')">Settings</button>
   </div>
 
-  <div class="app">
-    <div class="panel sidebar">
-      <h3>Subjects</h3>
-      <div class="nav" id="subjectNav"></div>
+  <div class="main">
 
-      <h3>Grades</h3>
-      <div class="nav" id="gradeNav"></div>
+    <div id="dashboard" class="view active">
+      <h1>Dashboard</h1>
+      <div class="card">Math Folder</div>
+      <div class="card">ELA Folder</div>
+      <div class="card">Science Folder</div>
     </div>
 
-    <div class="panel main">
-      <div class="header-row">
-        <div>
-          <h1 class="h1">Dashboard</h1>
-          <p class="sub">Pick a subject and grade. Start a lesson. Track your progress.</p>
-        </div>
-
-        <div class="filters">
-          <input class="search" id="search" placeholder="Search lessons">
-          <select class="select" id="sort">
-            <option value="recommended">Recommended</option>
-            <option value="title">Title</option>
-            <option value="grade">Grade</option>
-            <option value="subject">Subject</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="progress-wrap">
-        <div class="status" id="progressText">Progress</div>
-        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-        <div class="muted" id="continueText"></div>
-        <div>
-          <a class="btn primary" id="continueBtn" href="lesson.html?id=">Continue learning</a>
-          <button class="btn" id="resetProgress">Reset progress</button>
-        </div>
-      </div>
-
-      <div class="grid" id="lessonGrid"></div>
-    </div>
-
-    <div class="panel tools">
-      <h3>Tools</h3>
-
-      <div class="tool-block">
-        <div class="status">Study timer</div>
-        <div class="timer" id="timer">25:00</div>
-        <div>
-          <button class="btn primary" id="timerStart">Start</button>
-          <button class="btn" id="timerReset">Reset</button>
-        </div>
-        <div class="muted">25 minutes study, then take a short break.</div>
-      </div>
-
-      <div class="tool-block">
-        <div class="status">Quick tips</div>
-        <div class="muted" id="tip">Pick one lesson. Finish the quiz. Repeat.</div>
+    <div id="library" class="view">
+      <h1>Study Guides</h1>
+      <div class="grid">
+        <div class="card">Algebra</div>
+        <div class="card">Biology</div>
+        <div class="card">History</div>
+        <div class="card">ELA</div>
       </div>
     </div>
+
+    <div id="chat" class="view">
+      <div class="subject-bar">
+        <button onclick="setSubject('math')">Math</button>
+        <button onclick="setSubject('ela')">ELA</button>
+        <button onclick="setSubject('science')">Science</button>
+        <button onclick="setSubject('history')">History</button>
+      </div>
+
+      <div id="chatbox"></div>
+
+      <div class="input">
+        <input id="msg" placeholder="Ask your question">
+        <button onclick="send()">Send</button>
+      </div>
+    </div>
+
+    <div id="settings" class="view">
+      <h1>Account</h1>
+      <p>Blake Cabral</p>
+      <p>blake1127mm@gmail.com</p>
+      <button>Upgrade</button>
+      <button>Log out</button>
+    </div>
+
   </div>
+</div>
 
-  <script type="module" src="app.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
